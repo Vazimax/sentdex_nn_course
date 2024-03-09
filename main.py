@@ -24,3 +24,6 @@ activation = ReLU()
 
 layer1.forward(X)
 activation.forward(layer1.output)
+print(f'the output is: {activation.output}')
+
+
