@@ -19,11 +19,28 @@ class ReLU:
     def forward(self,inputs):
         self.output = np.maximum(0,inputs)
 
-layer1 = LayerDense(2,5)
-activation = ReLU()
+class SoftmaxActivation:
+    def forward(self,inputs):
+        exp_values = np.exp(inputs - np.max(inputs, axis=1, keepdims=True))
+        probabilities = exp_values / np.sum(exp_values, axis=1, keepdims=True)
+        self.output = probabilities
 
-layer1.forward(X)
-activation.forward(layer1.output)
-print(f'the output is: {activation.output}')
+
+X, y = spiral_data(samples=100, classes=3)
+
+dense1 = LayerDense(2,3)
+act1 = ReLU()
+
+dense2 = LayerDense(3,3)
+act2 = SoftmaxActivation()
+
+dense1.forward(X)
+act1.forward(dense1.output)
+
+dense2.forward(act1.output)
+act2.forward(dense2.output)
+
+print(act2.output[:3])
+
 
 
