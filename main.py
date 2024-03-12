@@ -25,7 +25,6 @@ class SoftmaxActivation:
         probabilities = exp_values / np.sum(exp_values, axis=1, keepdims=True)
         self.output = probabilities
 
-
 X, y = spiral_data(samples=100, classes=3)
 
 dense1 = LayerDense(2,3)
